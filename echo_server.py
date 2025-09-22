@@ -19,7 +19,9 @@ def read_request(connection):
     return client_data
 
 def parse_request(request_text):
-    request_line, headers_raw = request_text.split("\r\n", 1)
+    parts = request_text.split("\r\n", 1)
+    request_line = parts[0]
+    headers_raw = parts[1] if len(parts) > 1 else ''
     method, path, _ = request_line.split()
     return method, path, headers_raw
 
